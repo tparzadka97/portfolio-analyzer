@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'index' %}">Robinhood Analyzer</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+
+          {% url 'index' as index_url %} 
+          {% if request.path == index_url %}
+          <a class="nav-link active" href="{{ index_url }}">Home</a>
+          {% else %}
+          <a class="nav-link" href="{{ index_url }}">Home</a>
+          {% endif %}
+
+          {% url 'about' as about_url %}
+          {% if request.path == about_url %}
+          <a class="nav-link active" href="{{ about_url }}">About</a>
+          {% else %}
+          <a class="nav-link" href="{{ about_url }}">About</a>
+          {% endif %}
+
+          {% url 'contact' as contact_url %}
+          {% if request.path == contact_url %}
+          <a class="nav-link active" href="{{ contact_url }}">Contact</a>
+          {% else %}
+          <a class="nav-link" href="{{ contact_url }}">Contact</a>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+</nav>

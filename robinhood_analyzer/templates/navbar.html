@@ -6,7 +6,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                
                 {% url 'index' as index_url %} 
                 {% if request.path == index_url %}
                 <li class="nav-item">
@@ -40,9 +39,8 @@
                 </li>
                 {% endif %}
             </ul>
-            <form class="d-flex">
-                <button class="btn btn-primary" type="submit">Login</button>
-            </form>
+                <button class="btn btn-light me-2" type="login">Login</button>
+                <button class="btn btn-primary" type="register">Register</button>
         </div>
     </div>
 </nav>

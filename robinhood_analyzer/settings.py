@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'robinhood_analyzer.apps.accounts',
-    'robinhood_analyzer.apps.public'
+    'robinhood_analyzer.apps.public',
+    'robin_stocks'
 ]
 
 MIDDLEWARE = [

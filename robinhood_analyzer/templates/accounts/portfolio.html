@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Portfolio{% endblock %}
+
+{% block content %}
+<h1>{{ user.username }}'s Portfolio</h1>
+
+<a class="btn btn-success" href="" role="robinhood-login">Login with Robinhood</a>
+
+<h2>Stocks</h2>
+    <ul>
+    {% for key, value in my_stocks.items %}
+        <li>{{ key }}</li>
+            <ul>
+                <li>
+                    {{ value }}
+                </li>
+            </ul>
+    {% endfor %}
+    </ul>
+
+{% endblock %}

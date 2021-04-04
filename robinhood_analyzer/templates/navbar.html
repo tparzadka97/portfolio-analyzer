@@ -38,6 +38,19 @@
                     <a class="nav-link" href="{{ contact_url }}">Contact</a>
                 </li>
                 {% endif %}
+
+                {% if user.is_authenticated %}
+                {% url 'accounts:portfolio' as portfolio_url %}
+                {% if request.path == portfolio_url %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ portfolio_url }}">Portfolio</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ portfolio_url }}">Portfolio</a>
+                </li>
+                {% endif %}
+                {% endif %}
             </ul>
                 {% url 'accounts:login' as login_url %}
                 {% url 'accounts:logout' as logout_url %}

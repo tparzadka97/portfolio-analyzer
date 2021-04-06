@@ -1,8 +1,23 @@
+from django.contrib.auth import login, authenticate
+
 from django.views.generic.base import TemplateView
+from django.views.generic.edit import CreateView
+
+from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+from robinhood_analyzer.apps.accounts.forms import RegistrationForm
+
+from django.urls import reverse_lazy
 from django.shortcuts import redirect, render
 
 import robin_stocks.robinhood as r
+
+class RegisterView(SuccessMessageMixin, CreateView):
+    template_name = 'accounts/register.html'
+    success_url = reverse_lazy('accounts:login')
+    success_message = "Your account was successfully created!"
+    form_class = RegistrationForm
 
 class ProfileView(LoginRequiredMixin, TemplateView):
     template_name='accounts/profile.html'

@@ -53,6 +53,7 @@
                 {% endif %}
             </ul>
                 {% url 'accounts:login' as login_url %}
+                {% url 'accounts:register' as register_url %}
                 {% url 'accounts:logout' as logout_url %}
                 {% url 'accounts:profile' as profile_url %}
                 {% if user.is_authenticated %}
@@ -60,7 +61,7 @@
                 <a class="btn btn-primary" href="{{ logout_url }}" role="logout">Logout</a>
                 {% else %}
                 <a class="btn btn-light me-2" href="{{ login_url }}" role="login">Login</a>
-                <a class="btn btn-primary" href="{{ login_url }}" role="register">Register</a>
+                <a class="btn btn-primary" href="{{ register_url }}" role="register">Register</a>
                 {% endif %}
         </div>
     </div>

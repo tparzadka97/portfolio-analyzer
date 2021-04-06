@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'robinhood_analyzer.apps.accounts',
     'robinhood_analyzer.apps.public',
     'robinhood_analyzer.apps.rate_my_portfolio',
-    'robin_stocks'
+    'robin_stocks',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +127,4 @@ STATIC_URL = '/static/'
 LOGIN_URL = 'accounts:login'
 LOGIN_REDIRECT_URL = 'public:index'
 LOGOUT_REDIRECT_URL = 'public:index'
+AUTH_USER_MODEL = 'accounts.Account'

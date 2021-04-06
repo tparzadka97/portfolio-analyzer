@@ -11,7 +11,7 @@ class PortfolioView(LoginRequiredMixin, TemplateView):
     template_name='accounts/portfolio.html'
 
     def get(self, request, *args, **kwargs):
-        login = r.login('', '')
+        login = r.login('', '', store_session=False)
         my_stocks = r.build_holdings()
         my_stock_tickers = list(my_stocks.keys())
         fundamentals = r.get_fundamentals(my_stock_tickers)

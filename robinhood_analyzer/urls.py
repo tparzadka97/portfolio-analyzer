@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('robinhood_analyzer.apps.public.urls')),
     path('accounts/', include('robinhood_analyzer.apps.accounts.urls')),
+    path('ratemyportfolio/', include('robinhood_analyzer.apps.rate_my_portfolio.urls')),
 ]

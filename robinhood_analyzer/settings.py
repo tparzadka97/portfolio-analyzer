@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'robinhood_analyzer.apps.accounts',
     'robinhood_analyzer.apps.public',
+    'robinhood_analyzer.apps.rate_my_portfolio',
     'robin_stocks'
 ]
 

@@ -6,7 +6,7 @@ from django.views.generic.edit import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from robinhood_analyzer.apps.accounts.forms import RegistrationForm
+from portfolio_analyzer.apps.accounts.forms import RegistrationForm
 
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, render

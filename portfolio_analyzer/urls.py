@@ -1,4 +1,4 @@
-"""robinhood_analyzer URL Configuration
+"""portfolio_analyzer URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.1/topics/http/urls/
@@ -20,7 +20,7 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('robinhood_analyzer.apps.public.urls')),
-    path('accounts/', include('robinhood_analyzer.apps.accounts.urls')),
-    path('ratemyportfolio/', include('robinhood_analyzer.apps.rate_my_portfolio.urls')),
+    path('', include('portfolio_analyzer.apps.public.urls')),
+    path('accounts/', include('portfolio_analyzer.apps.accounts.urls')),
+    path('ratemyportfolio/', include('portfolio_analyzer.apps.rate_my_portfolio.urls')),
 ]

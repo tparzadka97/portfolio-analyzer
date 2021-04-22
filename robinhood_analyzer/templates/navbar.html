@@ -6,7 +6,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                {% url 'public:index' as index_url %} 
+                {% url 'public:index' as index_url %}
                 {% if request.path == index_url %}
                 <li class="nav-item">
                     <a class="nav-link active" href="{{ index_url }}">Home</a>

@@ -41,6 +41,7 @@
 
                 {% if user.is_authenticated %}
                 {% url 'accounts:portfolio' as portfolio_url %}
+                {% url 'rate_my_portfolio:' as rate_my_portfolio_url %}
                 {% if request.path == portfolio_url %}
                 <li class="nav-item">
                     <a class="nav-link active" href="{{ portfolio_url }}">Portfolio</a>
@@ -50,6 +51,18 @@
                     <a class="nav-link" href="{{ portfolio_url }}">Portfolio</a>
                 </li>
                 {% endif %}
+
+                {% url 'rate_my_portfolio:rate_my_portfolio' as rate_my_portfolio_url %}
+                {% if request.path == rate_my_portfolio_url %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ rate_my_portfolio_url }}">Rate My Portfolio</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ rate_my_portfolio_url }}">Rate My Portfolio</a>
+                </li>
+                {% endif %}
+
                 {% endif %}
             </ul>
                 {% url 'accounts:login' as login_url %}

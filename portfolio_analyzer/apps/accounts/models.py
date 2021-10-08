@@ -1,6 +1,10 @@
 from django.db import models
+
+from django.db.models.signals import pre_save
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.conf import settings
+from django.utils.text import slugify
+from django.dispatch import receiver
 
 class MyAccountManager(BaseUserManager):
     def create_user(self, email, username, password=None):
@@ -30,7 +34,6 @@ class MyAccountManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-
 class Account(AbstractBaseUser):
     email = models.EmailField(verbose_name='email', max_length=60, unique=True)
     username = models.CharField(max_length=30, unique = True)
@@ -59,11 +62,32 @@ class UserProfile(models.Model):
     bio = models.CharField(max_length=500, blank=True, null=True)
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile')
 
+def upload_location(instance, filename, **kwargs):
+    file_path = 'accounts/portfolio/{user_id}/{name}-{filename}'.format(
+        user_id=str(instance.user.id), name=str(instance.name), filename=filename
+    )
+    return file_path
+
 class Portfolio(models.Model):
     name = models.CharField(max_length=200)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    description = models.TextField(blank=True)
+    date_created = models.DateTimeField(auto_now=True, verbose_name='date created')
+    slug = models.SlugField(blank=True, unique=True)
+
+    def __str__(self):
+        return self.name
+
+def pre_save_portfolio_post_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = slugify(instance.user.username+'-'+instance.name)
+
+pre_save.connect(pre_save_portfolio_post_receiver, sender=Portfolio)
 
 class Stock(models.Model):
     ticker = models.CharField(max_length=10, unique=True)
     shares = models.PositiveIntegerField(default=0)
     portfolio = models.ForeignKey(Portfolio, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.ticker

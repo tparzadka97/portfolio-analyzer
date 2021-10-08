@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from portfolio_analyzer.apps.accounts.models import Account
+from portfolio_analyzer.apps.accounts.models import Account, Portfolio, Stock
 
 class AccountAdmin(UserAdmin):
     list_display = ('email', 'username', 'date_joined', 'last_login', 'is_admin', 'is_staff')
@@ -11,3 +11,6 @@ class AccountAdmin(UserAdmin):
     fieldsets = ()
 
 admin.site.register(Account, AccountAdmin)
+admin.site.register(Portfolio)
+admin.site.register(Stock)
+

@@ -3,11 +3,14 @@
 {% block title %}Portfolio{% endblock %}
 
 {% block content %}
-<h1>{{ user.username }}'s Portfolio</h1>
+<h1>{{ user.username }}'s Portfolios</h1>
 
-<a class="btn btn-success" href="" role="robinhood-login">Login with Robinhood</a>
 
-<h2>Stocks</h2>
+<a class="btn btn-primary" href="{% url 'accounts:portfolio_create' %}" role="new-portfolio">Create New Portfolio</a>
+<a class="btn btn-success" href="" role="robinhood-login">Sync With Robinhood</a>
+
+
+<h2>Your Portfolios</h2>
     <ul>
     {% for key, value in my_stocks.items %}
         <li>{{ key }}</li>

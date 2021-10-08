@@ -6,7 +6,7 @@ from django.views.generic.edit import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from portfolio_analyzer.apps.accounts.forms import RegistrationForm
+from portfolio_analyzer.apps.accounts.forms import RegistrationForm, PortfolioCreateForm
 
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, render
@@ -25,6 +25,7 @@ class ProfileView(LoginRequiredMixin, TemplateView):
 class PortfolioView(LoginRequiredMixin, TemplateView):
     template_name='accounts/portfolio.html'
 
+    """
     def get(self, request, *args, **kwargs):
         login = r.login('', '', store_session=False)
         my_stocks = r.build_holdings()
@@ -38,3 +39,14 @@ class PortfolioView(LoginRequiredMixin, TemplateView):
             print(key)
 
         return render(request, self.template_name, {'my_stocks': my_stocks})
+    """
+
+class PortfolioCreateView(LoginRequiredMixin, CreateView):
+    template_name='accounts/portfolio_create.html'
+    success_url = reverse_lazy('accounts:portfolio')
+    success_message = "A new portfolio was successfully created!"
+    form_class = PortfolioCreateForm
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)

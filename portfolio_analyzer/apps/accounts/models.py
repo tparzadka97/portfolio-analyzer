@@ -70,9 +70,9 @@ def upload_location(instance, filename, **kwargs):
 
 class Portfolio(models.Model):
     name = models.CharField(max_length=200)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     description = models.TextField(blank=True)
-    date_created = models.DateTimeField(auto_now=True, verbose_name='date created')
+    date_created = models.DateTimeField(auto_now_add=True, verbose_name='date created')
     slug = models.SlugField(blank=True, unique=True)
 
     def __str__(self):

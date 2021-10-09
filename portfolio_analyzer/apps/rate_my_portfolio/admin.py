@@ -1,3 +1,4 @@
 from django.contrib import admin
+from portfolio_analyzer.apps.rate_my_portfolio.models import Post
 
-# Register your models here.
+admin.site.register(Post)

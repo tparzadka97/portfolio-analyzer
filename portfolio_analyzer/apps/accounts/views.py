@@ -7,9 +7,10 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from portfolio_analyzer.apps.accounts.forms import RegistrationForm, PortfolioCreateForm
+from portfolio_analyzer.apps.accounts.models import Portfolio
 
 from django.urls import reverse_lazy
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 
 import robin_stocks.robinhood as r
 
@@ -24,6 +25,12 @@ class ProfileView(LoginRequiredMixin, TemplateView):
 
 class PortfolioView(LoginRequiredMixin, TemplateView):
     template_name='accounts/portfolio.html'
+    
+    def get(self, request, *args, **kwargs):
+        context = {}
+        portfolios = Portfolio.objects.filter(user=request.user)
+        context['portfolios'] = portfolios
+        return render(request, self.template_name, context)
 
     """
     def get(self, request, *args, **kwargs):
@@ -40,6 +47,15 @@ class PortfolioView(LoginRequiredMixin, TemplateView):
 
         return render(request, self.template_name, {'my_stocks': my_stocks})
     """
+
+class PortfolioDetailView(LoginRequiredMixin, TemplateView):
+    template_name='accounts/portfolio_detail.html'
+    
+    def get(self, request, slug):
+        context = {}
+        portfolio = get_object_or_404(Portfolio, slug=slug)
+        context['portfolio'] = portfolio
+        return render(request, self.template_name, context)
 
 class PortfolioCreateView(LoginRequiredMixin, CreateView):
     template_name='accounts/portfolio_create.html'

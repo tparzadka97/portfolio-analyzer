@@ -8,10 +8,16 @@ class RegistrationForm(UserCreationForm):
 
     class Meta:
         model = Account
-        fields = ('email', 'username', 'password1', 'password2')
+        fields = ['email', 'username', 'password1', 'password2']
 
 class PortfolioCreateForm(forms.ModelForm):
 
     class Meta:
         model = Portfolio
-        fields = ('name', 'description')
+        fields = ['name', 'description']
+
+class PortfolioUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = Portfolio
+        fields = ['name', 'description']

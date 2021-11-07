@@ -8,4 +8,8 @@
 <h2>{{portfolio.name}}</h2>
 <p>{{portfolio.description|safe}}</p>
 
+{% if portfolio.user == request.user %}
+<a class="btn btn-primary" href="{% url 'accounts:portfolio_edit' portfolio.slug%}">Edit</a>
+{% endif %}
+
 {% endblock content %}

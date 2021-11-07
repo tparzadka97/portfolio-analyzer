@@ -1,12 +1,12 @@
 from django.contrib.auth import login, authenticate
 
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from portfolio_analyzer.apps.rate_my_portfolio.forms import PostCreateForm
+from portfolio_analyzer.apps.rate_my_portfolio.forms import PostCreateForm, PostUpdateForm
 from portfolio_analyzer.apps.rate_my_portfolio.models import Post
 
 from django.urls import reverse_lazy
@@ -39,3 +39,11 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+class PostUpdateView(LoginRequiredMixin, UpdateView):
+    template_name='rate_my_portfolio/post_edit.html'
+    model = Post
+    form_class = PostUpdateForm
+    
+    def get_success_url(self):
+        return reverse_lazy('rate_my_portfolio:post_detail', kwargs={'slug': self.object.slug})

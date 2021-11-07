@@ -11,6 +11,8 @@ from portfolio_analyzer.apps.accounts.models import Portfolio
 
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, render, get_object_or_404
+from django.http import HttpResponseForbidden
+
 
 import robin_stocks.robinhood as r
 
@@ -71,6 +73,12 @@ class PortfolioUpdateView(LoginRequiredMixin, UpdateView):
     template_name='accounts/portfolio_edit.html'
     model = Portfolio
     form_class = PortfolioUpdateForm
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user != self.get_object().author:         
+            return HttpResponseForbidden()
+
+        return super().dispatch(request, *args, **kwargs)
     
     def get_success_url(self):
         return reverse_lazy('accounts:portfolio_detail', kwargs={'slug': self.object.slug})

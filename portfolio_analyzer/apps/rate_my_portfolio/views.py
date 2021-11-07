@@ -11,6 +11,7 @@ from portfolio_analyzer.apps.rate_my_portfolio.models import Post
 
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, render, get_object_or_404
+from django.http import HttpResponseForbidden
 
 class RateMyPortfolioView(LoginRequiredMixin, TemplateView):
     template_name='rate_my_portfolio/forum.html'
@@ -45,5 +46,11 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = Post
     form_class = PostUpdateForm
     
+    def dispatch(self, request, *args, **kwargs):
+        if request.user != self.get_object().author:         
+            return HttpResponseForbidden()
+
+        return super().dispatch(request, *args, **kwargs)
+
     def get_success_url(self):
         return reverse_lazy('rate_my_portfolio:post_detail', kwargs={'slug': self.object.slug})

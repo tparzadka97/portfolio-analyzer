@@ -11,6 +11,7 @@ urlpatterns = [
     path('portfolio/create', views.PortfolioCreateView.as_view(), name='portfolio_create'),
     path('portfolio/<slug>', views.PortfolioDetailView.as_view(), name='portfolio_detail'),
     path('portfolio/<slug>/edit', views.PortfolioUpdateView.as_view(), name='portfolio_edit'),
+    path('portfolio/<slug>/delete/', views.PortfolioDeleteView.as_view(), name='portfolio_delete'),
     path('login', auth_views.LoginView.as_view(template_name="accounts/login.html"), name='login'),
     path('logout', auth_views.LogoutView.as_view(), name='logout'),
     path('register', views.RegisterView.as_view(template_name="registration/register.html"), name='register'),

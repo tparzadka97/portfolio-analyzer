@@ -10,6 +10,7 @@
 
 {% if post.author == request.user %}
 <a class="btn btn-primary" href="{% url 'rate_my_portfolio:post_edit' post.slug%}">Edit</a>
+<a class="btn btn-danger" href="{% url 'rate_my_portfolio:post_delete' post.slug%}">Delete</a>
 {% endif %}
 
 {% endblock content %}

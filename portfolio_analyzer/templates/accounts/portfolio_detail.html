@@ -10,6 +10,7 @@
 
 {% if portfolio.user == request.user %}
 <a class="btn btn-primary" href="{% url 'accounts:portfolio_edit' portfolio.slug%}">Edit</a>
+<a class="btn btn-danger" href="{% url 'accounts:portfolio_delete' portfolio.slug%}">Delete</a>
 {% endif %}
 
 {% endblock content %}

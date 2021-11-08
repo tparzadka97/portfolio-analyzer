@@ -58,3 +58,9 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
 class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
     success_url = reverse_lazy('rate_my_portfolio:rate_my_portfolio')
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user != self.get_object().author:         
+            return HttpResponseForbidden()
+
+        return super().dispatch(request, *args, **kwargs)

@@ -86,3 +86,9 @@ class PortfolioUpdateView(LoginRequiredMixin, UpdateView):
 class PortfolioDeleteView(LoginRequiredMixin, DeleteView):
     model = Portfolio
     success_url = reverse_lazy('accounts:portfolio')
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user != self.get_object().user:         
+            return HttpResponseForbidden()
+
+        return super().dispatch(request, *args, **kwargs)

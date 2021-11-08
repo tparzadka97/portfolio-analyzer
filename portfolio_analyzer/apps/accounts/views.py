@@ -75,7 +75,7 @@ class PortfolioUpdateView(LoginRequiredMixin, UpdateView):
     form_class = PortfolioUpdateForm
 
     def dispatch(self, request, *args, **kwargs):
-        if request.user != self.get_object().author:         
+        if request.user != self.get_object().user:         
             return HttpResponseForbidden()
 
         return super().dispatch(request, *args, **kwargs)
